@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html>
+
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+ <style> 
+ body {
+  background-color: lightblue;
+  background-image: url("map.jpg");
+  background-repeat: no-repeat;
+  
+ }
+
+ #div1
+ {
+	width: 80px;
+	height: 80px;
+	position: absolute;
+	top: 460px;
+	left: 530px;
+	border: 1px solid red
+ }
+#div2 
+ {
+	width: 80px;
+	height: 80px;
+	position: absolute;
+	top: 650px;
+	left: 690px;
+	border: 1px solid red
+ }
+ #div3 
+ {
+	width: 80px;
+	height: 80px;
+	position: absolute;
+	top: 720px;
+	left: 510px;
+	border: 1px solid red
+ }
+ #div4
+ {
+	width: 80px;
+	height: 80px;
+	position: absolute;
+	top: 740px;
+	left: 240px;
+	border: 1px solid red
+ }
+  #div5
+ {
+	width: 80px;
+	height: 80px;
+	position: absolute;
+	top: 230px;
+	left: 890px;
+	border: 1px solid red
+ }
+  #div6
+ {
+	width: 80px;
+	height: 80px;
+	position: absolute;
+	top: 530px;
+	left: 960px;
+	border: 1px solid red
+ }
+  p.przeciwnik
+ {
+	display: none;
+ }
+
+
+ </style>
+
+<body>
+
+<div class="container">
+
+ <a href="wioska.html" class="btn btn-success" role="button">Wioska</a>
+ <a href="wojsko.html" class="btn btn-success" role="button">Wojsko</a>
+ <a href="mapa.html" class="btn btn-success" role="button">Mapa</a>
+ <a href="index2.html" class="btn btn-success" role="button">Powrót do menu</a>
+
+<body onload="startWorker()">
+<script>
+var w;
+
+var drewnopoziom=localStorage.getItem("drewnolvl");
+var drewnopracownicy=localStorage.getItem("drewnoprac");
+var drewnoilosc=localStorage.getItem("drewnoi");
+
+var kamienilosc=localStorage.getItem("kamieni");
+var kamienpoziom=localStorage.getItem("kamienlvl");
+var kamienpracownicy=localStorage.getItem("kamienprac");
+
+var zlotoilosc=localStorage.getItem("zlotoi")
+var zlotopoziom=localStorage.getItem("zlotolvl");
+var zlotopracownicy=localStorage.getItem("zlotoprac");
+
+var wegielilosc=localStorage.getItem("wegieli")
+var wegielpoziom=localStorage.getItem("wegiellvl");
+var wegielpracownicy=localStorage.getItem("wegielprac");
+
+var zelazoilosc=localStorage.getItem("zelazoi")
+var zelazopoziom=localStorage.getItem("zelazolvl");
+var zelazopracownicy=localStorage.getItem("zelazoprac");
+var centrum=localStorage.getItem("centrum");
+var magazynpoj=localStorage.getItem("pojemnosc");
+
+var topornik1=localStorage.getItem("topornik1");
+var lucznik1=localStorage.getItem("lucznik1");
+var miecznik1=localStorage.getItem("miecznik1");
+
+var topornik2=localStorage.getItem("topornik2");
+var lucznik2=localStorage.getItem("lucznik2");
+var miecznik2=localStorage.getItem("miecznik2");
+var kusznik2=localStorage.getItem("kusznik2");
+
+var topornik3=localStorage.getItem("topornik3");
+var lucznik3=localStorage.getItem("lucznik3");
+var miecznik3=localStorage.getItem("miecznik3");
+
+var miecznik4=localStorage.getItem("miecznik4");
+var lekka4=localStorage.getItem("lekka4");
+var ciezka4=localStorage.getItem("ciezka4");
+var kusznik4=localStorage.getItem("kusznik4");
+var mag4=localStorage.getItem("mag4");
+
+var miecznik5=localStorage.getItem("miecznik5");
+var lucznik5=localStorage.getItem("lucznik5");
+var kusznik5=localStorage.getItem("kusznik5");
+var mag5=localStorage.getItem("mag5");
+var arcymag5=localStorage.getItem("arcymag5");
+
+var miecznik6=localStorage.getItem("miecznik6");
+var lekka6=localStorage.getItem("lekka6");
+var ciezka6=localStorage.getItem("ciezka6");
+var kusznik6=localStorage.getItem("kusznik6");
+var mag6=localStorage.getItem("mag6");
+var arcymag6=localStorage.getItem("arcymag6");
+
+var mojtopornik=localStorage.getItem("topornicy");
+var mojmiecznik=localStorage.getItem("miecznicy");
+var mojlucznik=localStorage.getItem("lucznicy");
+var mojkusznik=localStorage.getItem("kusznicy");
+var mojlekka=localStorage.getItem("lekka");
+var mojciezka=localStorage.getItem("ciezka");
+var mojmag=localStorage.getItem("magowie");
+var mojarcymag=localStorage.getItem("arcymagowie");
+
+var ludzie=localStorage.getItem("ludzie");
+
+var stratyt;
+var stratym;
+var stratyl;
+var stratyk;
+var stratylj;
+var stratycj;
+var stratymag;
+var stratyam;
+var przeciwnik1=localStorage.getItem("przeciwnik1");
+var przeciwnik2=localStorage.getItem("przeciwnik2");
+var przeciwnik3=localStorage.getItem("przeciwnik3");
+var przeciwnik4=localStorage.getItem("przeciwnik4");
+var przeciwnik5=localStorage.getItem("przeciwnik5");
+var przeciwnik6=localStorage.getItem("przeciwnik6");
+var czas=localStorage.getItem("czas");
+
+function startWorker() {
+    if(typeof(Worker) !== "undefined") {
+        if(typeof(w) == "undefined") {
+            w = new Worker("proces.js");
+        }
+       
+        w.onmessage = function(event) {
+		if(drewnoilosc>=Number(magazynpoj))
+			{
+				drewnoilosc=Number(magazynpoj)-Number(event.data*drewnopoziom+5*drewnopracownicy);
+			}
+			if(kamienilosc>=Number(magazynpoj))
+			{
+				kamienilosc=Number(magazynpoj)-Number(event.data*kamienpoziom+5*kamienpracownicy);
+			}
+			if(wegielilosc>=Number(magazynpoj))
+			{
+				wegielilosc=Number(magazynpoj)-Number(event.data*wegielpoziom+5*wegielpracownicy);
+			}
+			if(zlotoilosc>=Number(magazynpoj))
+			{
+				zlotoilosc=Number(magazynpoj)-Number(event.data*zlotopoziom+5*zlotopracownicy);
+			}
+			if(zelazoilosc>=Number(magazynpoj))
+			{
+				zelazoilosc=Number(magazynpoj)-Number(event.data*zelazopoziom+5*zelazopracownicy);
+			}
+			czas=Number(czas)+1;
+           drewnoilosc= Number(event.data*drewnopoziom+5*drewnopracownicy)+Number(drewnoilosc)
+            kamienilosc = Number(event.data*kamienpoziom+5*kamienpracownicy)+Number(kamienilosc);
+            zlotoilosc = Number(event.data*zlotopoziom+5*zlotopracownicy)+Number(zlotoilosc);
+            wegielilosc = Number(event.data*wegielpoziom+5*wegielpracownicy)+Number(wegielilosc);
+            zelazoilosc = Number(event.data*zelazopoziom+5*zelazopracownicy)+Number(zelazoilosc);
+            
+            zapisz();
+        };
+        
+    } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Workers...";
+    }
+	
+}
+
+function zapisz() {
+   if (typeof(Storage) !== "undefined") {
+   
+   localStorage.setItem("drewnoi",drewnoilosc);
+   localStorage.setItem("kamieni",kamienilosc);
+   localStorage.setItem("zlotoi",zlotoilosc);
+   localStorage.setItem("wegieli",wegielilosc);
+   localStorage.setItem("zelazoi",zelazoilosc);
+   localStorage.setItem("czas",czas);
+}
+ }
+ function zapisz2()
+ {
+   localStorage.setItem("topornicy",mojtopornik);
+   localStorage.setItem("miecznicy",mojmiecznik);
+   localStorage.setItem("lucznicy",mojlucznik);
+   localStorage.setItem("kusznicy",mojkusznik);
+   localStorage.setItem("lekka",mojlekka);
+   localStorage.setItem("ciezka",mojciezka);
+   localStorage.setItem("magowie",mojmag);
+   localStorage.setItem("arcymagowie",mojarcymag);
+   
+   localStorage.setItem("topornik1",topornik1);
+   localStorage.setItem("miecznik1",miecznik1);
+   localStorage.setItem("lucznik1",lucznik1);
+   
+    localStorage.setItem("topornik2",topornik2);
+	localStorage.setItem("miecznik2",miecznik2);
+	localStorage.setItem("lucznik2",lucznik2);
+	localStorage.setItem("kusznik2",kusznik2);
+	
+	localStorage.setItem("topornik3",topornik3);
+	localStorage.setItem("miecznik3",miecznik3);
+	localStorage.setItem("lucznik3",lucznik3);
+	
+	localStorage.setItem("miecznik4",miecznik4);
+	localStorage.setItem("lekka4",lekka4);
+	localStorage.setItem("ciezka4",ciezka4);
+	localStorage.setItem("kusznik4",kusznik4);
+	localStorage.setItem("mag4",mag4);
+	
+	localStorage.setItem("miecznik5",miecznik5);
+	localStorage.setItem("lucznik5",lucznik5);
+	localStorage.setItem("kusznik5",kusznik5);
+	localStorage.setItem("mag5",mag5);
+	localStorage.setItem("arcymag5",arcymag5);
+	
+	localStorage.setItem("miecznik6",miecznik6);
+	localStorage.setItem("lekka6",lekka6);
+	localStorage.setItem("ciezka6",ciezka6);
+	localStorage.setItem("kusznik6",kusznik6);
+	localStorage.setItem("mag6",mag6);
+	localStorage.setItem("arcymag6",arcymag6);
+	
+	localStorage.setItem("ludzie",ludzie);
+	
+	localStorage.setItem("przeciwnik1",przeciwnik1);
+	localStorage.setItem("przeciwnik2",przeciwnik2);
+	localStorage.setItem("przeciwnik3",przeciwnik3);
+	localStorage.setItem("przeciwnik4",przeciwnik4);
+	localStorage.setItem("przeciwnik5",przeciwnik5);
+	localStorage.setItem("przeciwnik6",przeciwnik6);
+	
+	 if(Number(przeciwnik1)==1 & Number(przeciwnik2)==1 & Number(przeciwnik3)==1 & Number(przeciwnik4)==1 & Number(przeciwnik5)==1 & Number(przeciwnik6)==1)
+			{
+				alert("Zwycięstwo");
+				window.location.href = 'zapisz.html';
+			}
+ }
+ function pokaz1()
+ {
+ var a1 = document.getElementById("b1");
+    if (a1.style.display == "block") {
+        a1.style.display = "none";
+    } else {
+        a1.style.display = "block";
+    }
+ }
+ function pokaz2()
+ {
+ var a2 = document.getElementById("b2");
+    if (a2.style.display == "block") {
+        a2.style.display = "none";
+    } else {
+        a2.style.display = "block";
+    }
+ }
+ function pokaz3()
+ {
+ var a3 = document.getElementById("b3");
+    if (a3.style.display == "block") {
+        a3.style.display = "none";
+    } else {
+        a3.style.display = "block";
+    }
+ }
+ function pokaz4()
+ {
+ var a4 = document.getElementById("b4");
+    if (a4.style.display == "block") {
+        a4.style.display = "none";
+    } else {
+        a4.style.display = "block";
+    }
+ }
+ function pokaz5()
+ {
+ var a5 = document.getElementById("b5");
+    if (a5.style.display == "block") {
+        a5.style.display = "none";
+    } else {
+        a5.style.display = "block";
+    }
+ }
+ function pokaz6()
+ {
+ var a6 = document.getElementById("b6");
+    if (a6.style.display == "block") {
+        a6.style.display = "none";
+    } else {
+        a6.style.display = "block";
+    }
+ }
+ function badaj1()
+ {
+	if(Number(centrum)>=1)
+	{
+		alert("Topornicy: "+topornik1+"\nŁucznicy: "+lucznik1+"\nMiecznicy: "+miecznik1);
+	}
+	else 
+	{
+		alert("Nie spełniono wymagań");
+	}
+ }
+ function badaj2()
+ {
+	if(Number(centrum)>=2)
+	{
+		alert("Topornicy: "+topornik2+"\nŁucznicy: "+lucznik2+"\nMiecznicy: "+miecznik2+"\nKusznicy: "+kusznik2);
+	}
+	else 
+	{
+		alert("Nie spełniono wymagań");
+	}
+ }
+ function badaj3()
+ {
+	if(Number(centrum)>=3)
+	{
+		alert("Topornicy: "+topornik3+"\nŁucznicy: "+lucznik3+"\nMiecznicy: "+miecznik3);
+	}
+	else 
+	{
+		alert("Nie spełniono wymagań");
+	}
+ }
+ function badaj4()
+ {
+	if(Number(centrum)>=4)
+	{
+		alert("Miecznicy: "+miecznik4+"\nKusznicy: "+kusznik4+"\nLekka jazda: "+lekka4+"\nCieżka jazda: "+ciezka4+"\nMagowie: "+mag4);
+	}
+	else 
+	{
+		alert("Nie spełniono wymagań");
+	}
+ }
+ function badaj5()
+ {
+	if(Number(centrum)>=5)
+	{
+		alert("Miecznicy: "+miecznik5+"\nŁucznicy: "+lucznik5+"\nKusznicy: "+kusznik5+"\nMagowie: "+mag5+"\nArcymagowie: "+arcymag5);
+	}
+	else 
+	{
+		alert("Nie spełniono wymagań");
+	}
+ }
+ function badaj6()
+ {
+	if(Number(centrum)>=6)
+	{
+		alert("Miecznicy: "+miecznik6+"\nKusznicy: "+kusznik6+"\nLekka jazda: "+lekka6+"\nCieżka jazda: "+ciezka6+"\nMagowie: "+mag6+"\nArcymagowie: "+arcymag6);
+	}
+	else 
+	{
+		alert("Nie spełniono wymagań");
+	}
+ }
+ function atak1()
+ {
+ var matak=15*Number(mojtopornik)+25*Number(mojmiecznik)+20*Number(mojlucznik)+30*Number(mojkusznik)+35*Number(mojlekka)+45*Number(mojciezka)+40*Number(mojmag)+50*Number(mojarcymag);
+
+	var def=10*topornik1+30*lucznik1+35*miecznik1;
+	var mstraty=(def/(matak+1));
+	var pstraty=(matak/(def+1));
+	
+	if(mstraty>1)
+	{
+		mstraty=1;
+	}
+	if(pstraty>1)
+	{
+		pstraty=1;
+	}
+	
+	ludzie=Number(ludzie)-Math.round(Number(mojtopornik)*mstraty)-Math.round(Number(mojmiecznik)*mstraty)-Math.round(Number(mojlucznik)*mstraty)-Math.round(Number(mojkusznik)*mstraty)-Math.round(Number(mojlekka)*mstraty)-Math.round(Number(mojciezka)*mstraty)-Math.round(Number(mojmag)*mstraty)-Math.round(Number(mojarcymag)*mstraty);
+	
+	mojtopornik=Math.round(Number(mojtopornik)-Number(mojtopornik)*mstraty);
+	mojmiecznik=Math.round(Number(mojmiecznik)-Number(mojmiecznik)*mstraty);
+	mojlucznik=Math.round(Number(mojlucznik)-Number(mojlucznik)*mstraty);
+	mojkusznik=Math.round(Number(mojkusznik)-Number(mojkusznik)*mstraty);
+	mojlekka=Math.round(Number(mojlekka)-Number(mojlekka)*mstraty);
+	mojciezka=Math.round(Number(mojciezka)-Number(mojciezka)*mstraty);
+	mojmag=Math.round(Number(mojmag)-Number(mojmag)*mstraty);
+	mojarcymag=Math.round(Number(mojarcymag)-Number(mojarcymag)*mstraty);
+		
+	stratyt=Math.round(Number(topornik1)*pstraty);
+	stratym=Math.round(Number(miecznik1)*pstraty);
+	stratyl=Math.round(Number(lucznik1)*pstraty);
+	
+	topornik1=Math.round(Number(topornik1)-Number(topornik1)*pstraty);
+	lucznik1=Math.round(Number(lucznik1)-Number(lucznik1)*pstraty);
+	miecznik1=Math.round(Number(miecznik1)-Number(miecznik1)*pstraty);
+	
+	
+	
+	if(pstraty>=mstraty)
+	{
+		alert("Przeciwnik pokonany!"+"\nPokonane jednostki: "+"\nTopornicy: "+stratyt+"\nMiecznicy: "+stratym+"\nŁucznicy: "+stratyl+"\n\nTwoje wojsko:"+"\nTopornicy: "+mojtopornik+"\nMiecznicy: "+mojmiecznik+"\nŁucznicy: "+mojlucznik+"\nKusznicy: "+mojkusznik+"\nLekka jazda: "+mojlekka+"\nCiężka jazda: "+mojciezka+"\nMagowie: "+mojmag+"\nArcymagowie: "+mojarcymag);
+		
+		przeciwnik1=1;
+	}
+	if(mstraty>pstraty)
+	{
+		alert("Porażka!"+"\nPokonane jednostki: "+"\nTopornicy: "+stratyt+"\nMiecznicy: "+stratym+"\nŁucznicy: "+stratyl);
+	}
+	zapisz2();
+ }
+ function atak2()
+ {
+  var matak=15*Number(mojtopornik)+25*Number(mojmiecznik)+20*Number(mojlucznik)+30*Number(mojkusznik)+35*Number(mojlekka)+45*Number(mojciezka)+40*Number(mojmag)+50*Number(mojarcymag);
+  
+	var def=10*topornik2+30*lucznik2+35*miecznik2+45*kusznik2;
+	var mstraty=(def/(matak+1));
+	var pstraty=(matak/(def+1));
+	if(mstraty>1)
+	{
+		mstraty=1;
+	}
+	if(pstraty>1)
+	{
+		pstraty=1;
+	}
+	
+	ludzie=Number(ludzie)-Math.round(Number(mojtopornik)*mstraty)-Math.round(Number(mojmiecznik)*mstraty)-Math.round(Number(mojlucznik)*mstraty)-Math.round(Number(mojkusznik)*mstraty)-Math.round(Number(mojlekka)*mstraty)-Math.round(Number(mojciezka)*mstraty)-Math.round(Number(mojmag)*mstraty)-Math.round(Number(mojarcymag)*mstraty);
+	
+	mojtopornik=Math.round(Number(mojtopornik)-Number(mojtopornik)*mstraty);
+	mojmiecznik=Math.round(Number(mojmiecznik)-Number(mojmiecznik)*mstraty);
+	mojlucznik=Math.round(Number(mojlucznik)-Number(mojlucznik)*mstraty);
+	mojkusznik=Math.round(Number(mojkusznik)-Number(mojkusznik)*mstraty);
+	mojlekka=Math.round(Number(mojlekka)-Number(mojlekka)*mstraty);
+	mojciezka=Math.round(Number(mojciezka)-Number(mojciezka)*mstraty);
+	mojmag=Math.round(Number(mojmag)-Number(mojmag)*mstraty);
+	mojarcymag=Math.round(Number(mojarcymag)-Number(mojarcymag)*mstraty);
+	
+	stratyt=Math.round(Number(topornik2)*pstraty);
+	stratym=Math.round(Number(miecznik2)*pstraty);
+	stratyl=Math.round(Number(lucznik2)*pstraty);
+	stratyk=Math.round(Number(kusznik2)*pstraty);
+	
+	topornik2=Math.round(Number(topornik2)-Number(topornik2)*pstraty);
+	lucznik2=Math.round(Number(lucznik2)-Number(lucznik2)*pstraty);
+	miecznik2=Math.round(Number(miecznik2)-Number(miecznik2)*pstraty);
+	kusznik2=Math.round(Number(kusznik2)-Number(kusznik2)*pstraty);
+
+	
+	
+	if(pstraty>=mstraty)
+	{
+		alert("Przeciwnik pokonany!"+"\nPokonane jednostki: "+"\nTopornicy: "+stratyt+"\nMiecznicy: "+stratym+"\nŁucznicy: "+stratyl+"\nKusznicy: "+stratyk+"\n\nTwoje wojsko:"+"\nTopornicy: "+mojtopornik+"\nMiecznicy: "+mojmiecznik+"\nŁucznicy: "+mojlucznik+"\nKusznicy: "+mojkusznik+"\nLekka jazda: "+mojlekka+"\nCiężka jazda: "+mojciezka+"\nMagowie: "+mojmag+"\nArcymagowie: "+mojarcymag);
+		
+		przeciwnik2=1;
+	}
+	if(mstraty>pstraty)
+	{
+		alert("Porażka!"+"\nPokonane jednostki: "+"\nTopornicy: "+stratyt+"\nMiecznicy: "+stratym+"\nŁucznicy: "+stratyl+"\nKusznicy: "+stratyk);
+	}
+	zapisz2();
+ }
+ function atak3()
+ {
+	var matak=15*Number(mojtopornik)+25*Number(mojmiecznik)+20*Number(mojlucznik)+30*Number(mojkusznik)+35*Number(mojlekka)+45*Number(mojciezka)+40*Number(mojmag)+50*Number(mojarcymag);
+  
+	var def=10*topornik3+30*lucznik3+35*miecznik3;
+	var mstraty=(def/(matak+1));
+	var pstraty=(matak/(def+1));
+	if(mstraty>1)
+	{
+		mstraty=1;
+	}
+	if(pstraty>1)
+	{
+		pstraty=1;
+	}
+	
+	ludzie=Number(ludzie)-Math.round(Number(mojtopornik)*mstraty)-Math.round(Number(mojmiecznik)*mstraty)-Math.round(Number(mojlucznik)*mstraty)-Math.round(Number(mojkusznik)*mstraty)-Math.round(Number(mojlekka)*mstraty)-Math.round(Number(mojciezka)*mstraty)-Math.round(Number(mojmag)*mstraty)-Math.round(Number(mojarcymag)*mstraty);
+	
+	mojtopornik=Math.round(Number(mojtopornik)-Number(mojtopornik)*mstraty);
+	mojmiecznik=Math.round(Number(mojmiecznik)-Number(mojmiecznik)*mstraty);
+	mojlucznik=Math.round(Number(mojlucznik)-Number(mojlucznik)*mstraty);
+	mojkusznik=Math.round(Number(mojkusznik)-Number(mojkusznik)*mstraty);
+	mojlekka=Math.round(Number(mojlekka)-Number(mojlekka)*mstraty);
+	mojciezka=Math.round(Number(mojciezka)-Number(mojciezka)*mstraty);
+	mojmag=Math.round(Number(mojmag)-Number(mojmag)*mstraty);
+	mojarcymag=Math.round(Number(mojarcymag)-Number(mojarcymag)*mstraty);
+	
+	stratyt=Math.round(Number(topornik3)*pstraty);
+	stratym=Math.round(Number(miecznik3)*pstraty);
+	stratyl=Math.round(Number(lucznik3)*pstraty);
+	
+	topornik3=Math.round(Number(topornik3)-Number(topornik3)*pstraty);
+	lucznik3=Math.round(Number(lucznik3)-Number(lucznik3)*pstraty);
+	miecznik3=Math.round(Number(miecznik3)-Number(miecznik3)*pstraty);
+
+	
+	
+	if(pstraty>=mstraty)
+	{
+		alert("Przeciwnik pokonany!"+"\nPokonane jednostki: "+"\nTopornicy: "+stratyt+"\nMiecznicy: "+stratym+"\nŁucznicy: "+stratyl+"\n\nTwoje wojsko:"+"\nTopornicy: "+mojtopornik+"\nMiecznicy: "+mojmiecznik+"\nŁucznicy: "+mojlucznik+"\nKusznicy: "+mojkusznik+"\nLekka jazda: "+mojlekka+"\nCiężka jazda: "+mojciezka+"\nMagowie: "+mojmag+"\nArcymagowie: "+mojarcymag);
+		
+		przeciwnik3=1;
+	}
+	if(mstraty>pstraty)
+	{
+		alert("Porażka!"+"\nPokonane jednostki: "+"\nTopornicy: "+stratyt+"\nMiecznicy: "+stratym+"\nŁucznicy: "+stratyl);
+	}
+	zapisz2()
+ }
+ function atak4()
+ {
+	var matak=15*Number(mojtopornik)+25*Number(mojmiecznik)+20*Number(mojlucznik)+30*Number(mojkusznik)+35*Number(mojlekka)+45*Number(mojciezka)+40*Number(mojmag)+50*Number(mojarcymag);
+  
+	var def=35*miecznik4+45*kusznik4+25*lekka4+35*ciezka4+30*mag4;
+	var mstraty=(def/(matak+1));
+	var pstraty=(matak/(def+1));
+	if(mstraty>1)
+	{
+		mstraty=1;
+	}
+	if(pstraty>1)
+	{
+		pstraty=1;
+	}
+	
+	ludzie=Number(ludzie)-Math.round(Number(mojtopornik)*mstraty)-Math.round(Number(mojmiecznik)*mstraty)-Math.round(Number(mojlucznik)*mstraty)-Math.round(Number(mojkusznik)*mstraty)-Math.round(Number(mojlekka)*mstraty)-Math.round(Number(mojciezka)*mstraty)-Math.round(Number(mojmag)*mstraty)-Math.round(Number(mojarcymag)*mstraty);
+	
+	mojtopornik=Math.round(Number(mojtopornik)-Number(mojtopornik)*mstraty);
+	mojmiecznik=Math.round(Number(mojmiecznik)-Number(mojmiecznik)*mstraty);
+	mojlucznik=Math.round(Number(mojlucznik)-Number(mojlucznik)*mstraty);
+	mojkusznik=Math.round(Number(mojkusznik)-Number(mojkusznik)*mstraty);
+	mojlekka=Math.round(Number(mojlekka)-Number(mojlekka)*mstraty);
+	mojciezka=Math.round(Number(mojciezka)-Number(mojciezka)*mstraty);
+	mojmag=Math.round(Number(mojmag)-Number(mojmag)*mstraty);
+	mojarcymag=Math.round(Number(mojarcymag)-Number(mojarcymag)*mstraty);
+	
+	stratym=Math.round(Number(miecznik4)*pstraty);
+	stratyk=Math.round(Number(kusznik4)*pstraty);
+	stratylj=Math.round(Number(lekka4)*pstraty);
+	stratycj=Math.round(Number(ciezka4)*pstraty);
+	stratymag=Math.round(Number(mag4)*pstraty);
+	
+	miecznik4=Math.round(Number(miecznik4)-Number(miecznik4)*pstraty);
+	kusznik4=Math.round(Number(kusznik4)-Number(kusznik4)*pstraty);
+	lekka4=Math.round(Number(lekka4)-Number(lekka4)*pstraty);
+	ciezka4=Math.round(Number(ciezka4)-Number(ciezka4)*pstraty);
+	mag4=Math.round(Number(mag4)-Number(mag4)*pstraty);
+	
+	if(pstraty>=mstraty)
+	{
+		alert("Przeciwnik pokonany!"+"\nPokonane jednostki: "+"\nKusznicy: "+stratyk+"\nMiecznicy: "+stratym+"\nLekka jazda: "+stratylj+"\nCiężka jazda: "+stratycj+"\nMagowie: "+stratymag+"\n\nTwoje wojsko:"+"\nTopornicy: "+mojtopornik+"\nMiecznicy: "+mojmiecznik+"\nŁucznicy: "+mojlucznik+"\nKusznicy: "+mojkusznik+"\nLekka jazda: "+mojlekka+"\nCiężka jazda: "+mojciezka+"\nMagowie: "+mojmag+"\nArcymagowie: "+mojarcymag);
+		
+		przeciwnik4=1;
+	}
+	if(mstraty>pstraty)
+	{
+		alert("Porażka!"+"\nPokonane jednostki: "+"\nKusznicy: "+stratyk+"\nMiecznicy: "+stratym+"\nLekka jazda: "+stratylj+"\nCiężka jazda: "+stratycj+"\nMagowie: "+stratymag);
+	}
+	zapisz2()
+ }
+ function atak5()
+ {
+		var matak=15*Number(mojtopornik)+25*Number(mojmiecznik)+20*Number(mojlucznik)+30*Number(mojkusznik)+35*Number(mojlekka)+45*Number(mojciezka)+40*Number(mojmag)+50*Number(mojarcymag);
+  
+	var def=35*miecznik5+lucznik5*30+45*kusznik5+30*mag5+arcymag5*50;
+	var mstraty=(def/(matak+1));
+	var pstraty=(matak/(def+1));
+	if(mstraty>1)
+	{
+		mstraty=1;
+	}
+	if(pstraty>1)
+	{
+		pstraty=1;
+	}
+	
+	ludzie=Number(ludzie)-Math.round(Number(mojtopornik)*mstraty)-Math.round(Number(mojmiecznik)*mstraty)-Math.round(Number(mojlucznik)*mstraty)-Math.round(Number(mojkusznik)*mstraty)-Math.round(Number(mojlekka)*mstraty)-Math.round(Number(mojciezka)*mstraty)-Math.round(Number(mojmag)*mstraty)-Math.round(Number(mojarcymag)*mstraty);
+	
+	mojtopornik=Math.round(Number(mojtopornik)-Number(mojtopornik)*mstraty);
+	mojmiecznik=Math.round(Number(mojmiecznik)-Number(mojmiecznik)*mstraty);
+	mojlucznik=Math.round(Number(mojlucznik)-Number(mojlucznik)*mstraty);
+	mojkusznik=Math.round(Number(mojkusznik)-Number(mojkusznik)*mstraty);
+	mojlekka=Math.round(Number(mojlekka)-Number(mojlekka)*mstraty);
+	mojciezka=Math.round(Number(mojciezka)-Number(mojciezka)*mstraty);
+	mojmag=Math.round(Number(mojmag)-Number(mojmag)*mstraty);
+	mojarcymag=Math.round(Number(mojarcymag)-Number(mojarcymag)*mstraty);
+	
+	stratym=Math.round(Number(miecznik5)*pstraty);
+	stratyl=Math.round(Number(lucznik5)*pstraty);
+	stratyk=Math.round(Number(kusznik5)*pstraty);
+	stratymag=Math.round(Number(mag5)*pstraty);
+	stratyam=Math.round(Number(arcymag5)*pstraty);
+	
+	miecznik5=Math.round(Number(miecznik5)-Number(miecznik5)*pstraty);
+	lucznik5=Math.round(Number(lucznik5)-Number(lucznik5)*pstraty);
+	kusznik5=Math.round(Number(kusznik5)-Number(kusznik5)*pstraty);
+	mag5=Math.round(Number(mag5)-Number(mag5)*pstraty);
+	arcymag5=Math.round(Number(arcymag5)-Number(arcymag5)*pstraty);
+	
+	if(pstraty>=mstraty)
+	{
+		alert("Przeciwnik pokonany!"+"\nPokonane jednostki: "+"\nŁucznicy: "+stratyl+"\nKusznicy: "+stratyk+"\nMiecznicy: "+stratym+"\nMagowie: "+stratymag+"\nArcymagowie: "+stratyam+"\n\nTwoje wojsko:"+"\nTopornicy: "+mojtopornik+"\nMiecznicy: "+mojmiecznik+"\nŁucznicy: "+mojlucznik+"\nKusznicy: "+mojkusznik+"\nLekka jazda: "+mojlekka+"\nCiężka jazda: "+mojciezka+"\nMagowie: "+mojmag+"\nArcymagowie: "+mojarcymag);
+		
+		przeciwnik5=1;
+	}
+	if(mstraty>pstraty)
+	{
+		alert("Porażka!"+"\nPokonane jednostki: "+"\nŁucznicy: "+stratyl+"\nKusznicy: "+stratyk+"\nMiecznicy: "+stratym+"\nMagowie: "+stratymag+"\nArcymagowie: "+stratyam);
+	}
+	zapisz2()
+ }
+ function atak6()
+ {
+	var matak=15*Number(mojtopornik)+25*Number(mojmiecznik)+20*Number(mojlucznik)+30*Number(mojkusznik)+35*Number(mojlekka)+45*Number(mojciezka)+40*Number(mojmag)+50*Number(mojarcymag);
+  
+	var def=35*miecznik6+45*kusznik6+lekka6*25+ciezka6*35+30*mag6+arcymag6*50;
+	var mstraty=(def/(matak+1));
+	var pstraty=(matak/(def+1));
+	if(mstraty>1)
+	{
+		mstraty=1;
+	}
+	if(pstraty>1)
+	{
+		pstraty=1;
+	}
+	
+	ludzie=Number(ludzie)-Math.round(Number(mojtopornik)*mstraty)-Math.round(Number(mojmiecznik)*mstraty)-Math.round(Number(mojlucznik)*mstraty)-Math.round(Number(mojkusznik)*mstraty)-Math.round(Number(mojlekka)*mstraty)-Math.round(Number(mojciezka)*mstraty)-Math.round(Number(mojmag)*mstraty)-Math.round(Number(mojarcymag)*mstraty);
+	
+	mojtopornik=Math.round(Number(mojtopornik)-Number(mojtopornik)*mstraty);
+	mojmiecznik=Math.round(Number(mojmiecznik)-Number(mojmiecznik)*mstraty);
+	mojlucznik=Math.round(Number(mojlucznik)-Number(mojlucznik)*mstraty);
+	mojkusznik=Math.round(Number(mojkusznik)-Number(mojkusznik)*mstraty);
+	mojlekka=Math.round(Number(mojlekka)-Number(mojlekka)*mstraty);
+	mojciezka=Math.round(Number(mojciezka)-Number(mojciezka)*mstraty);
+	mojmag=Math.round(Number(mojmag)-Number(mojmag)*mstraty);
+	mojarcymag=Math.round(Number(mojarcymag)-Number(mojarcymag)*mstraty);
+	
+	stratym=Math.round(Number(miecznik6)*pstraty);
+	stratyk=Math.round(Number(kusznik6)*pstraty);
+	stratylj=Math.round(Number(lekka6)*pstraty);
+	stratycj=Math.round(Number(ciezka6)*pstraty);
+	stratymag=Math.round(Number(mag6)*pstraty);
+	stratyam=Math.round(Number(arcymag6)*pstraty);
+	
+	miecznik6=Math.round(Number(miecznik6)-Number(miecznik6)*pstraty);
+	kusznik6=Math.round(Number(kusznik6)-Number(kusznik6)*pstraty);
+	lekka6=Math.round(Number(lekka6)-Number(lekka6)*pstraty);
+	ciezka6=Math.round(Number(ciezka6)-Number(ciezka6)*pstraty);
+	mag6=Math.round(Number(mag6)-Number(mag6)*pstraty);
+	arcymag6=Math.round(Number(arcymag6)-Number(arcymag6)*pstraty);
+	
+	if(pstraty>=mstraty)
+	{
+		alert("Przeciwnik pokonany!"+"\nPokonane jednostki: "+"\nKusznicy: "+stratyk+"\nMiecznicy: "+stratym+"\nLekka jazda: "+stratylj+"\nCiężka jazda: "+stratycj+"\nMagowie: "+stratymag+"\nArcymagowie: "+stratyam+"\n\nTwoje wojsko:"+"\nTopornicy: "+mojtopornik+"\nMiecznicy: "+mojmiecznik+"\nŁucznicy: "+mojlucznik+"\nKusznicy: "+mojkusznik+"\nLekka jazda: "+mojlekka+"\nCiężka jazda: "+mojciezka+"\nMagowie: "+mojmag+"\nArcymagowie: "+mojarcymag);
+		
+		przeciwnik6=1;
+	}
+	if(mstraty>pstraty)
+	{
+		alert("Porażka!"+"\nPokonane jednostki: "+"\nKusznicy: "+stratyk+"\nMiecznicy: "+stratym+"\nLekka jazda: "+stratylj+"\nCiężka jazda: "+stratycj+"\nMagowie: "+stratymag+"\nArcymagowie: "+stratyam);
+	}
+	zapisz2()
+ }
+
+</script>
+<div id="div1" onclick="pokaz1()"><p id="b1" class="przeciwnik"><button onclick="badaj1()">zbadaj</button><button onclick="atak1()">atakuj</button></p></div>
+<div id="div2" onclick="pokaz2()"><p id="b2" class="przeciwnik"><button onclick="badaj2()">zbadaj</button><button onclick="atak2()">atakuj</button></p></div>
+<div id="div3" onclick="pokaz3()"><p id="b3" class="przeciwnik"><button onclick="badaj3()">zbadaj</button><button onclick="atak3()">atakuj</button></p></div>
+<div id="div4" onclick="pokaz4()"><p id="b4" class="przeciwnik"><button onclick="badaj4()">zbadaj</button><button onclick="atak4()">atakuj</button></p></div>
+<div id="div5" onclick="pokaz5()"><p id="b5" class="przeciwnik"><button onclick="badaj5()">zbadaj</button><button onclick="atak5()">atakuj</button></p></div>
+<div id="div6" onclick="pokaz6()"><p id="b6" class="przeciwnik"><button onclick="badaj6()">zbadaj</button><button onclick="atak6()">atakuj</button></p></div>
+
+
+
+
+
+
+</body>
+</html>

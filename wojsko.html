@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+ <style> 
+ body {
+  background-color: lightblue;
+ }
+td{
+
+}
+td1{
+	width: 250px;
+	height: 200px;
+}
+#div1 {
+	width: 100px;
+	height: 150px;
+    margin-left: 50px;
+	background-image: url("topornik.png");
+ }
+ #div2 {
+	width: 100px;
+	height: 150px;
+    margin-left: 50px;
+	background-image: url("miecznik.png");
+ }
+ #div3 {
+	width: 100px;
+	height: 150px;
+    margin-left: 50px;   
+	background-image: url("lucznik.png");
+ }
+ #div4 {
+	width: 100px;
+	height: 150px;
+
+    margin-left: 50px;
+	background-image: url("kusznik.jpg");
+ }
+ #div5 {
+	width: 100px;
+	height: 150px;
+    margin-left: 50px;
+	background-image: url("lekka.jpg");
+ }
+ #div6 {
+	width: 100px;
+	height: 150px;
+    margin-left: 50px;
+	background-image: url("ciezka.jpg");
+ }
+#div7 {
+	width: 100px;
+	height: 150px;
+    margin-left: 50px;
+	background-image: url("mag.jpg");
+ }
+ #div8 {
+	width: 100px;
+	height: 150px;
+    margin-left: 50px;
+	background-image: url("arcymag.png");
+ }
+  p.nazwa1 {
+	margin-top: 20px;
+    margin-left: 50px;
+	font-size:17px;
+	line-height:20px;
+ }
+ p.nazwa2 {
+	margin-top: 10px;
+	margin-left: 20px;
+	font-size:17px;
+	line-height:20px;
+ }
+ p.nazwa3 {
+	margin-top: 80px;
+	margin-left: 50px;
+	font-size:17px;
+	line-height:20px;
+ }
+ p.nazwa4 {
+	margin-top: 10px;
+	margin-left: 30px;
+	font-size:17px;
+	line-height:20px;
+ }
+ p.nazwa5 {
+	margin-top: 10px;
+	margin-left: 50px;
+	font-size:17px;
+	line-height:20px;
+ }
+ p.surowce
+ {
+    margin-left: 200px;
+	font-size:17px;
+	line-height:20px;
+ }
+ </style>
+ 
+<body>
+
+<div class="container">
+
+ <a href="wioska.html" class="btn btn-success" role="button">Wioska</a>
+ <a href="wojsko.html" class="btn btn-success" role="button">Wojsko</a>
+ <a href="mapa.html" class="btn btn-success" role="button">Mapa</a>
+ <a href="index2.html" class="btn btn-success" role="button">Powrót do menu</a>
+ <body onload="startWorker()">
+ 
+ <table>
+<tr>
+  <td><p class="nazwa1">Topornik<button onclick="topornikadd()">+</button><br>Atak: 15<br>Obrona: 10</p><div id="div1"></div></td>
+   <td><p class="nazwa1">Miecznik<button onclick="miecznikadd()">+</button><br>Atak: 25<br>Obrona: 35</p><div id="div2"></div></td>
+    <td><p class="nazwa1">Łucznik<button onclick="lucznikadd()">+</button><br>Atak: 20<br>Obrona: 30</p><div id="div3"></div></td>
+	 <td><p class="nazwa1">Kusznik<button onclick="kusznikadd()">+</button><br>Atak: 30<br>Obrona: 45</p><div id="div4"></div></td>
+	 <td><p class="nazwa1">Drewno: <output id="drewno1"></output><br>Kamień: <output id="kamien1"></output><br>Żelazo: <output id="zelazo1"></output><br>Złoto: <output id="zloto1"></output><br>Węgiel: <output id="wegiel1"></output><br>Liczba ludności: <output id="ludnosc1"></output>     /<output id="ludnoscmax"></output></p></td>
+		 
+ </tr>
+ <tr>
+  <td><p class="nazwa1">Lekka jazda<button onclick="lekkaadd()">+</button><br>Atak: 35<br>Obrona: 25</p><div id="div5"></div></td>
+   <td><p class="nazwa1">Ciężka jazda<button onclick="ciezkaadd()">+</button><br>Atak: 45<br>Obrona: 35</p><div id="div6"></div></td>
+    <td><p class="nazwa1">Mag<button onclick="magadd()">+</button><br>Atak: 40<br>Obrona: 30</p><div id="div7"></div></td>
+	 <td><p class="nazwa1">Arcymag<button onclick="arcymagadd()">+</button><br>Atak: 50<br>Obrona: 50</p><div id="div8"></div></td>
+	 <td><p class="nazwa1">Wymagania:<br>Topornik: (Koszary 1)<br>Miecznik: (Koszary 5)<br>Łucznik: (Koszary, 3 Wieża łucznicza 1)<br>Kusznik: (Koszary 4, Wieża łucznicza 3)<br>Lekka jazda: (Koszary 5, Stajnia 1)<br>Ciężka jazda: (Koszary 6, Stajnia 4)<br>Mag: (Koszary 5, Akademia 1)<br>Arcymag: (Koszary 6, Akademia 4)<br><br><br>Topornik ilość: <output id="topornik"></output><br>Miecznik ilość: <output id="miecznik"></output><br>Łucznik ilość: <output id="lucznik"></output><br>Kusznik ilość: <output id="kusznik"></output><br>Lekka jazda ilość: <output id="lekka"></output><br>Ciężka jazda ilość: <output id="ciezka"></output><br>Mag ilość: <output id="mag"></output><br>Arcymag ilość: <output id="arcymag"></output>Topornik koszt: 100d, 10ż, 5w<br>Miecznik koszt: 100d, 100ż, 50w<br>Łucznik koszt: 130d<br>Kusznik koszt: 150d, 50ż, 25w<br>Lekka koszt: 110d, 70ż, 35w<br>Cięzka koszt: 80d, 160ż, 80w<br>Mag koszt: 140d, 60ż, 30w<br>Arcymag koszt: 150d, 80ż, 40w</p></td>
+ </tr>
+ 
+ 
+ </table> 
+ 
+
+<script>
+var w;
+var magazynpoj=localStorage.getItem("pojemnosc");
+var drewnopoziom=localStorage.getItem("drewnolvl");
+var drewnopracownicy=localStorage.getItem("drewnoprac");
+var drewnoilosc=localStorage.getItem("drewnoi");
+
+var kamienilosc=localStorage.getItem("kamieni");
+var kamienpoziom=localStorage.getItem("kamienlvl");
+var kamienpracownicy=localStorage.getItem("kamienprac");
+
+var zlotoilosc=localStorage.getItem("zlotoi");
+var zlotopoziom=localStorage.getItem("zlotolvl");
+var zlotopracownicy=localStorage.getItem("zlotoprac");
+
+var wegielilosc=localStorage.getItem("wegieli");
+var wegielpoziom=localStorage.getItem("wegiellvl");
+var wegielpracownicy=localStorage.getItem("wegielprac");
+
+var zelazoilosc=localStorage.getItem("zelazoi")
+var zelazopoziom=localStorage.getItem("zelazolvl");
+var zelazopracownicy=localStorage.getItem("zelazoprac");
+
+var ludnosc=localStorage.getItem("ludzie");
+var maxludnosc=localStorage.getItem("maxludzie");
+var koszary=localStorage.getItem("koszary");
+var wieza =localStorage.getItem("wieza");
+var stajnia=localStorage.getItem("stajnia");
+var akademia=localStorage.getItem("akademia");
+
+
+var topornikilosc=localStorage.getItem("topornicy");
+var topronikatk=15;
+var topornikdef=10;
+var topornikkosztd=100;
+var topornikkosztz=10;
+var topornikkosztw=5;
+
+var miecznikilosc=localStorage.getItem("miecznicy");
+var miecznikatk=25;
+var miecznikdef=35;
+var miecznikkosztd=100;
+var miecznikkosztz=100;
+var miecznikkosztw=50;
+
+var lucznikilosc=localStorage.getItem("lucznicy");
+var lucznikatk=20;
+var lucznikdef=30
+var lucznikkosztd=130;
+
+var kusznikilosc=localStorage.getItem("kusznicy");
+var kusznikatk=30;
+var kusznikdef=45;
+var kusznikkosztd=150
+var kusznikkosztz=50;
+var kusznikkosztw=25;
+
+var lekkailosc=localStorage.getItem("lekka");
+var lekkaatk=35;
+var lekkadef=25;
+var lekkakosztd=110;
+var lekkakosztz=70;
+var lekkakosztw=35;
+
+var ciezkailosc=localStorage.getItem("ciezka");
+var ciezkaatk=45;
+var ciezkadef=35;
+var ciezkakosztd=80;
+var ciezkakosztz=160;
+var ciezkakosztw=80;
+
+var magilosc=localStorage.getItem("magowie");
+var madatk=40;
+var magdef=30;
+var magkosztd=140;
+var magkosztz=60;
+var magkosztw=30;
+
+var arcymagilosc=localStorage.getItem("arcymagowie");
+var arcymagatk=50;
+var arcymagdef=50;
+var arcymagkosztd=150;
+var arcymagkosztz=80;
+var arcymagkosztw=40;
+var czas=localStorage.getItem("czas");
+
+document.getElementById("drewno1").innerHTML=drewnoilosc;
+document.getElementById("kamien1").innerHTML=kamienilosc;
+document.getElementById("zloto1").innerHTML=zlotoilosc;
+document.getElementById("zelazo1").innerHTML=zelazoilosc;
+document.getElementById("wegiel1").innerHTML=wegielilosc;
+document.getElementById("ludnoscmax").innerHTML=maxludnosc;
+document.getElementById("ludnosc1").innerHTML=ludnosc;
+
+function startWorker() {
+    if(typeof(Worker) !== "undefined") {
+        if(typeof(w) == "undefined") {
+            w = new Worker("proces.js");
+        }
+       
+        w.onmessage = function(event) {
+           if(drewnoilosc>=Number(magazynpoj))
+			{
+				drewnoilosc=Number(magazynpoj)-Number(event.data*drewnopoziom+5*drewnopracownicy);
+			}
+			if(kamienilosc>=Number(magazynpoj))
+			{
+				kamienilosc=Number(magazynpoj)-Number(event.data*kamienpoziom+5*kamienpracownicy);
+			}
+			if(wegielilosc>=Number(magazynpoj))
+			{
+				wegielilosc=Number(magazynpoj)-Number(event.data*wegielpoziom+5*wegielpracownicy);
+			}
+			if(zlotoilosc>=Number(magazynpoj))
+			{
+				zlotoilosc=Number(magazynpoj)-Number(event.data*zlotopoziom+5*zlotopracownicy);
+			}
+			if(zelazoilosc>=Number(magazynpoj))
+			{
+				zelazoilosc=Number(magazynpoj)-Number(event.data*zelazopoziom+5*zelazopracownicy);
+			}
+			
+            document.getElementById("drewno1").innerHTML = Number(event.data*drewnopoziom+5*drewnopracownicy)+Number(drewnoilosc)
+            document.getElementById("kamien1").innerHTML = Number(event.data*kamienpoziom+5*kamienpracownicy)+Number(kamienilosc);
+            document.getElementById("zloto1").innerHTML = Number(event.data*zlotopoziom+5*zlotopracownicy)+Number(zlotoilosc);
+            document.getElementById("wegiel1").innerHTML = Number(event.data*wegielpoziom+5*wegielpracownicy)+Number(wegielilosc);
+            document.getElementById("zelazo1").innerHTML = Number(event.data*zelazopoziom+5*zelazopracownicy)+Number(zelazoilosc);
+    czas=Number(czas)+1;
+		drewnoilosc=document.getElementById("drewno1").innerHTML;
+		kamienilosc=document.getElementById("kamien1").innerHTML;
+		zlotoilosc=document.getElementById("zloto1").innerHTML;
+		zelazoilosc=document.getElementById("zelazo1").innerHTML;
+		wegielilosc=document.getElementById("wegiel1").innerHTML;
+		document.getElementById("ludnosc1").innerHTML=ludnosc;
+		document.getElementById("topornik").innerHTML=topornikilosc;
+		document.getElementById("miecznik").innerHTML=miecznikilosc;
+		document.getElementById("lucznik").innerHTML=lucznikilosc;
+		document.getElementById("kusznik").innerHTML=kusznikilosc;
+		document.getElementById("lekka").innerHTML=lekkailosc;
+		document.getElementById("ciezka").innerHTML=ciezkailosc;
+		document.getElementById("mag").innerHTML=magilosc;
+		document.getElementById("arcymag").innerHTML=arcymagilosc;
+            zapisz();
+        };
+        
+    } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Workers...";
+    }
+	
+}
+
+function zapisz() {
+   if (typeof(Storage) !== "undefined") {
+   
+   localStorage.setItem("drewnoi",drewnoilosc);
+   localStorage.setItem("kamieni",kamienilosc);
+   localStorage.setItem("zlotoi",zlotoilosc);
+   localStorage.setItem("wegieli",wegielilosc);
+   localStorage.setItem("zelazoi",zelazoilosc);
+   localStorage.setItem("topornicy",topornikilosc);
+   localStorage.setItem("miecznicy",miecznikilosc);
+   localStorage.setItem("lucznicy",lucznikilosc);
+   localStorage.setItem("kusznicy",kusznikilosc);
+   localStorage.setItem("lekka",lekkailosc);
+   localStorage.setItem("ciezka",ciezkailosc);
+   localStorage.setItem("magowie",magilosc);
+   localStorage.setItem("arcymagowie",arcymagilosc);
+   localStorage.setItem("ludzie",ludnosc);
+   localStorage.setItem("czas",czas);
+}
+ }
+ function topornikadd()
+ {
+ if(topornikkosztd>drewnoilosc | topornikkosztz>zelazoilosc | topornikkosztw>wegielilosc)
+	{
+		alert("Za mało surowców!");
+	}
+	if(koszary<1)
+	{
+		alert("Nie spełniono wymagań");
+	}
+	if(topornikkosztd<=drewnoilosc & topornikkosztz<=zelazoilosc & topornikkosztw<=wegielilosc & ludnosc<Number(maxludnosc) & koszary>=1)
+	{
+		topornikilosc=Number(topornikilosc)+1;
+		ludnosc=Number(ludnosc)+1;
+		drewnoilosc=drewnoilosc-topornikkosztd;
+		zelazoilosc=zelazoilosc-topornikkosztz;
+		wegielilosc=wegielilosc-topornikkosztw;
+	}
+	
+ }
+ function miecznikadd()
+ {
+ if(miecznikkosztd>drewnoilosc | miecznikkosztz>zelazoilosc | miecznikkosztw>wegielilosc)
+	{
+		alert("Za mało surowców!");
+	}
+	if(koszary<5)
+	{
+		alert("Nie spełniono wymagań");
+	}
+	if(miecznikkosztd<=drewnoilosc & miecznikkosztz<=zelazoilosc & miecznikkosztw<=wegielilosc & ludnosc<Number(maxludnosc) & koszary>=5)
+	{
+		miecznikilosc=Number(miecznikilosc)+1;
+		ludnosc=Number(ludnosc)+1;
+		drewnoilosc=drewnoilosc-miecznikkosztd;
+		zelazoilosc=zelazoilosc-miecznikkosztz;
+		wegielilosc=wegielilosc-miecznikkosztw;
+	}
+	
+ }
+ function lucznikadd()
+ {
+	if(lucznikkosztd>drewnoilosc)
+	{
+		alert("Za mało surowców!");
+	}
+	if(koszary<3 | wieza<1)
+	{
+		alert("Nie spełniono wymagań");
+	}
+	if(lucznikkosztd<=drewnoilosc & ludnosc<Number(maxludnosc) & koszary>=3 & wieza>=1)
+	{
+		lucznikilosc=Number(lucznikilosc)+1;
+		ludnosc=Number(ludnosc)+1;
+		drewnoilosc=drewnoilosc-lucznikkosztd;
+	}	
+ }
+ function kusznikadd()
+ {
+	if(kusznikkosztd>drewnoilosc | kusznikkosztz>zelazoilosc | kusznikkosztw>wegielilosc)
+	{
+		alert("Za mało surowców!");
+	}
+	if(koszary<4 | wieza<3)
+	{
+		alert("Nie spełniono wymagań");
+	}
+	if(kusznikkosztd<=drewnoilosc & kusznikkosztz<=zelazoilosc & kusznikkosztw<=wegielilosc & ludnosc<Number(maxludnosc) & koszary>=4 & wieza>=3)
+	{
+		kusznikilosc=Number(kusznikilosc)+1;
+		ludnosc=Number(ludnosc)+1;
+		drewnoilosc=drewnoilosc-kusznikkosztd;
+		zelazoilosc=zelazoilosc-kusznikkosztz;
+		wegielilosc=wegielilosc-kusznikkosztw;
+	}
+ }
+ function lekkaadd()
+ {
+	if(lekkakosztd>drewnoilosc | lekkakosztz>zelazoilosc | lekkakosztw>wegielilosc)
+	{
+		alert("Za mało surowców!");
+	}
+	if(koszary<5 | stajnia<1)
+	{
+		alert("Nie spełniono wymagań");
+	}
+	if(lekkakosztd<=drewnoilosc & lekkakosztz<=zelazoilosc & lekkakosztw<=wegielilosc & ludnosc<Number(maxludnosc) & koszary>=5 & stajnia>=1)
+	{
+		lekkailosc=Number(lekkailosc)+1;
+		ludnosc=Number(ludnosc)+1;
+		drewnoilosc=drewnoilosc-lekkakosztd;
+		zelazoilosc=zelazoilosc-lekkakosztz;
+		wegielilosc=wegielilosc-lekkakosztw;
+	}	
+ }
+ function ciezkaadd()
+ {
+	if(ciezkakosztd>drewnoilosc | ciezkakosztz>zelazoilosc | ciezkakosztw>wegielilosc)
+	{
+		alert("Za mało surowców!");
+	}
+	if(koszary<6 | stajnia<4)
+	{
+		alert("Nie spełniono wymagań");
+	}
+	if(ciezkakosztd<=drewnoilosc & ciezkakosztz<=zelazoilosc & ciezkakosztw<=wegielilosc & ludnosc<Number(maxludnosc) & koszary>=6 & stajnia>=4)
+	{
+		ciezkailosc=Number(ciezkailosc)+1;
+		ludnosc=Number(ludnosc)+1;
+		drewnoilosc=drewnoilosc-ciezkakosztd;
+		zelazoilosc=zelazoilosc-ciezkakosztz;
+		wegielilosc=wegielilosc-ciezkakosztw;
+	}	
+ }
+ function magadd()
+ {
+	if(magkosztd>drewnoilosc | magkosztz>zelazoilosc | magkosztw>wegielilosc)
+	{
+		alert("Za mało surowców!");
+	}
+	if(koszary<5 | akademia<1)
+	{
+		alert("Nie spełniono wymagań");
+	}
+	if(magkosztd<=drewnoilosc & magkosztz<=zelazoilosc & magkosztw<=wegielilosc & ludnosc<Number(maxludnosc) & koszary>=5 & akademia>=1)
+	{
+		magilosc=Number(magilosc)+1;
+		ludnosc=Number(ludnosc)+1;
+		drewnoilosc=drewnoilosc-magkosztd;
+		zelazoilosc=zelazoilosc-magkosztz;
+		wegielilosc=wegielilosc-magkosztw;
+	}
+ }
+ function arcymagadd()
+ {
+	if(arcymagkosztd>drewnoilosc | arcymagkosztz>zelazoilosc | arcymagkosztw>wegielilosc)
+	{
+		alert("Za mało surowców!");
+	}
+	if(koszary<6 | akademia<4)
+	{
+		alert("Nie spełniono wymagań");
+	}
+	if(arcymagkosztd<=drewnoilosc & arcymagkosztz<=zelazoilosc & arcymagkosztw<=wegielilosc & ludnosc<Number(maxludnosc) & koszary>=6 & akademia>=4)
+	{
+		arcymagilosc=Number(arcymagilosc)+1;
+		ludnosc=Number(ludnosc)+1;
+		drewnoilosc=drewnoilosc-arcymagkosztd;
+		zelazoilosc=zelazoilosc-arcymagkosztz;
+		wegielilosc=wegielilosc-arcymagkosztw;
+	}
+ }
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

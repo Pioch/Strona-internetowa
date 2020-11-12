@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html>
+
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+ <style> 
+ body {
+  background-color: lightblue;
+ }
+ 
+#div1 {
+    width: 230px;
+    height: 100px;
+    
+
+
+	background-image: url("tartak.jpg");
+    
+}
+ #div2 {
+    width: 230px;
+    height: 100px;
+
+
+	background-image: url("kamieniolom.jpg")
+    
+    
+}
+
+ #div3 {
+    width: 230px;
+    height: 100px;
+
+
+	background-image: url("stajnia.jpg")
+    
+}
+
+#div4 {
+    width: 230px;
+    height: 100px;
+
+
+	background-image: url("koszary.png")
+    
+}
+ #div5 {
+    width: 230px;
+    height: 100px;
+
+
+	background-image: url("dom.jpg")
+    
+}
+ #div6 {
+    width: 230px;
+    height: 100px;
+
+
+
+	background-image: url("centrum.png")
+   
+}
+
+#div7 {
+    width: 230px;
+    height: 100px;
+
+
+	background-image: url("wegiel.jpg")
+
+}
+ #div8 {
+    width: 230px;
+    height: 100px;
+
+	background-image: url("zloto.jpg")
+    
+}
+ #div9 {
+    width: 230px;
+    height: 100px;
+
+
+	background-image: url("zelazo.jpg")
+    
+}
+
+#div10 {
+    width: 230px;
+    height: 100px;
+
+	background-image: url("akademia.jpg")
+    
+}
+ #div11 {
+    width: 230px;
+    height: 100px;
+
+	background-image: url("wieza.jpg")
+
+}
+ #div12 {
+    width: 230px;
+    height: 100px;
+
+	background-image: url("magazyn.png")
+    
+}
+
+p.nazwa1 {
+    margin-top: 27px;
+	font-size:17px;
+	line-height:17px;
+}
+p.nazwa2 {
+    margin-top: 24px;
+	margin-left: 80px;
+	font-size:17px;
+	line-height:17px;
+}
+p.nazwa3 {
+    margin-top: 96px;
+	font-size:17px;
+	line-height:17px;
+}
+p.nazwa4 {
+    margin-top: 96px;
+	margin-left: 80px;
+	font-size:17px;
+	line-height:17px;
+}
+p.nazwa5 {
+	font-size:17px;
+	line-height:17px;
+	margin-left: 80px;
+}
+p.nazwa6 {
+    margin-top: 109px;
+	margin-left: 80px;
+	font-size:17px;
+	line-height:17px;
+}
+p.nazwa7 {
+    margin-top: 109px;
+	font-size:17px;
+	line-height:17px;
+}
+p.nazwa11 {
+    margin-top: 100px;
+	font-size:17px;
+	line-height:17px;
+}
+ #drag1 {
+ position: absolute;
+ width: 60px;
+ height: 100px;
+ }
+td {
+ width: 300px;
+ height: 190px;
+}
+
+ </style>
+ 
+<body>
+
+<div class="container">
+
+ <a href="wioska.html" class="btn btn-success" role="button">Wioska</a>
+ <a href="wojsko.html" class="btn btn-success" role="button">Wojsko</a>
+ <a href="mapa.html" class="btn btn-success" role="button">Mapa</a>
+ <a href="index2.html" class="btn btn-success" role="button">Powrót do menu</a>
+ 
+ <table>
+ <tr>
+<td><p class="nazwa1">Tartak<button onclick="adddrewno()"> +</button><br>Poziom: <output id="drewno2"></output><br>Ilość pracowników: <output id="drewno3"></output><br>Koszt: (<output id="drewno4"></output>,<output id="drewno5"></output>)</p><div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><p class="nazwa1">Kamieniołom<button onclick="addkamien()"> +</button><br>Poziom: <output id="kamien2"></output><br>Ilość pracowników: <output id="kamien3"></output><br>Koszt: (<output id="kamien4"></output>,<output id="kamien5"></output>)</p><div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><p class="nazwa1"><br>Stajnia<button onclick="addstajnia()"> +</button><br>Poziom: <output id="stajnia1"></output><br>Koszt: (<output id="stajnia2"></output>,<output id="stajnia3"></output>)</p><div id="div3"></div></td>
+ <td><p class="nazwa1">Drewno: <output id="drewno1"></output><br>Kamień: <output id="kamien1"></output><br>Żelazo: <output id="zelazo1"></output><br>Złoto: <output id="zloto1"></output><br>Węgiel: <output id="wegiel1"></output><br>Liczba ludności: <output id="ludnosc1"></output>     /<output id="ludnoscmax"></output><br>Pojemność magazynu: <output id="pojemnosc"></output></p></td>
+ </tr>
+ 
+ <tr>
+ <td><p class="nazwa1"><br>Koszary<button onclick="addkoszary()"> +</button><br>Poziom: <output id="koszary1"></output><br>Koszt: (<output id="koszary2"></output>,<output id="koszary3"></output>)</p><div id="div4"></div></td>
+ <td><p class="nazwa1"><br>Domy mieszkalne<button onclick="adddom()"> +</button><br>Poziom: <output id="domy1"></output><br>Koszt: (<output id="domy2"></output>,<output id="domy3"></output>)</p><div id="div5"></div></td>
+ <td><p class="nazwa1"><br>Centrum Ekspedycyjne<button onclick="addcentrum()"> +</button><br>Poziom: <output id="centrum1"></output><br>Koszt: (<output id="centrum2"></output>,<output id="centrum3"></output>)</p><div id="div6"></div></td>
+ <td><p class="nazwa1">Przeciągnij pracownika, by go dodać</p> <img id="drag1" src="worker.jpg" draggable="true" ondragstart="drag(event)" ></td>
+ 
+ </tr>
+ 
+ <tr>
+ <td><p class="nazwa1">Kopalnia węgla<button onclick="addwegiel()"> +</button><br>Poziom: <output id="wegiel2"></output><br>Ilość pracowników: <output id="wegiel3"></output><br>Koszt: (<output id="wegiel4"></output>,<output id="wegiel5"></output>)</p><div id="div7" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+ <td><p class="nazwa1">Kopalnia złota<button onclick="addzloto()"> +</button><br>Poziom: <output id="zloto2"></output><br>Ilość pracowników: <output id="zloto3"></output><br>Koszt: (<output id="zloto4"></output>,<output id="zloto5"></output>)</p><div id="div8" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+ <td><p class="nazwa1">Kopalnia żelaza<button onclick="addzelazo()"> +</button><br>Poziom: <output id="zelazo2"></output><br>Ilość pracowników: <output id="zelazo3"></output><br>Koszt: (<output id="zelazo4"></output>,<output id="zelazo5"></output>)</p><div id="div9" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+ </tr>
+ 
+ <tr>
+ <td><p class="nazwa1"><br>Akademia<button onclick="addakademia()"> +</button><br>Poziom: <output id="akademia1"></output><br>Koszt: (<output id="akademia2"></output>,<output id="akademia3"></output>)</p><div id="div10"></div></td>
+ <td><p class="nazwa1"><br>Wieża łucznicza<button onclick="addwieza()"> +</button><br>Poziom: <output id="wieza1"></output><br>Koszt: (<output id="wieza2"></output>,<output id="wieza3"></output>)</p><div id="div11"></div></td>
+ <td><p class="nazwa1"><br>Magazyn<button onclick="addmagazyn()"> +</button><br>Poziom: <output id="magazyn1"></output><br>Koszt: (<output id="magazyn2"></output>,<output id="magazyn3"></output>)<div id="div12"></div></td>
+ </tr>
+ 
+</table>
+<body onload="startWorker()">
+
+
+ <script>
+var w;
+
+var drewnoilosc=localStorage.getItem("drewnoi");
+var drewnopoziom=localStorage.getItem("drewnolvl");
+var drewnopracownicy=localStorage.getItem("drewnoprac");
+
+var kamienilosc=localStorage.getItem("kamieni")
+var kamienpoziom=localStorage.getItem("kamienlvl");
+var kamienpracownicy=localStorage.getItem("kamienprac");
+
+var zlotoilosc=localStorage.getItem("zlotoi")
+var zlotopoziom=localStorage.getItem("zlotolvl");
+var zlotopracownicy=localStorage.getItem("zlotoprac");
+
+var wegielilosc=localStorage.getItem("wegieli")
+var wegielpoziom=localStorage.getItem("wegiellvl");
+var wegielpracownicy=localStorage.getItem("wegielprac");
+
+var zelazoilosc=localStorage.getItem("zelazoi")
+var zelazopoziom=localStorage.getItem("zelazolvl");
+var zelazopracownicy=localStorage.getItem("zelazoprac");
+
+var stajnia=localStorage.getItem("stajnia");
+var koszary=localStorage.getItem("koszary");
+var domy=localStorage.getItem("domy");
+var centrum=localStorage.getItem("centrum");
+var akademia=localStorage.getItem("akademia");
+var wieza=localStorage.getItem("wieza");
+var magazyn=localStorage.getItem("magazyn");
+var ludnoscdom=localStorage.getItem("maxludzie");
+var ludnosc=localStorage.getItem("ludzie");
+
+var drewnokosztd;
+var kamienkosztd;
+var wegielkosztd;
+var zlotokosztd;
+var zelazokosztd;
+var koszarykosztd;
+var stajniakosztd;
+var akademiakosztd;
+var centrumkosztd;
+var wiezakosztd;
+var domykosztd;
+var magazynkosztd;
+
+var drewnokosztk;
+var kamienkosztk;
+var wegielkosztk;
+var zlotokosztk;
+var zelazokosztk;
+var koszarykosztk;
+var stajniakosztk;
+var akademiakosztk;
+var centrumkosztk;
+var wiezakosztk;
+var domykosztk;
+var magazynkosztk;
+var robotnikkoszt;
+var magazynpoj;
+var czas=localStorage.getItem("czas");
+var robotnikilosc=localStorage.getItem("robotnicy");
+
+function startWorker() {
+    if(typeof(Worker) !== "undefined") {
+        if(typeof(w) == "undefined") {
+            w = new Worker("proces.js");
+        }
+       
+        w.onmessage = function(event) {
+             magazynpoj=Number(magazyn)*Number(magazyn)*6000+6000;
+             if(drewnoilosc>=magazynpoj)
+			{
+				drewnoilosc=magazynpoj-Number(event.data*drewnopoziom+5*drewnopracownicy);
+			}
+			if(kamienilosc>=magazynpoj)
+			{
+				kamienilosc=magazynpoj-Number(event.data*kamienpoziom+5*kamienpracownicy);
+			}
+			if(wegielilosc>=magazynpoj)
+			{
+				wegielilosc=magazynpoj-Number(event.data*wegielpoziom+5*wegielpracownicy);
+			}
+			if(zlotoilosc>=magazynpoj)
+			{
+				zlotoilosc=magazynpoj-Number(event.data*zlotopoziom+5*zlotopracownicy);
+			}
+			if(zelazoilosc>=magazynpoj)
+			{
+				zelazoilosc=magazynpoj-Number(event.data*zelazopoziom+5*zelazopracownicy);
+			}
+			
+            document.getElementById("drewno1").innerHTML = Number(event.data*drewnopoziom+5*drewnopracownicy)+Number(drewnoilosc);
+            document.getElementById("kamien1").innerHTML = Number(event.data*kamienpoziom+5*kamienpracownicy)+Number(kamienilosc);
+            document.getElementById("zloto1").innerHTML = Number(event.data*zlotopoziom+5*zlotopracownicy)+Number(zlotoilosc);
+            document.getElementById("wegiel1").innerHTML = Number(event.data*wegielpoziom+5*wegielpracownicy)+Number(wegielilosc);
+            document.getElementById("zelazo1").innerHTML = Number(event.data*zelazopoziom+5*zelazopracownicy)+Number(zelazoilosc);
+			
+            drewnoilosc=document.getElementById("drewno1").innerHTML;
+            kamienilosc=document.getElementById("kamien1").innerHTML;
+            zlotoilosc=document.getElementById("zloto1").innerHTML;
+            wegielilosc=document.getElementById("wegiel1").innerHTML;
+            zelazoilosc=document.getElementById("zelazo1").innerHTML;
+            ludnoscdom=Number(domy)*Number(domy)*5+5;
+            
+			czas=Number(czas)+1;
+			
+            document.getElementById("drewno2").innerHTML=drewnopoziom;
+            document.getElementById("drewno3").innerHTML=drewnopracownicy;
+            document.getElementById("kamien2").innerHTML=kamienpoziom;
+            document.getElementById("kamien3").innerHTML=kamienpracownicy;
+            document.getElementById("zloto2").innerHTML=zlotopoziom;
+            document.getElementById("zloto3").innerHTML=zlotopracownicy;
+            document.getElementById("zelazo2").innerHTML=zelazopoziom;
+            document.getElementById("zelazo3").innerHTML=zelazopracownicy;
+            document.getElementById("wegiel2").innerHTML=wegielpoziom;
+            document.getElementById("wegiel3").innerHTML=wegielpracownicy;
+            document.getElementById("stajnia1").innerHTML=stajnia;
+            document.getElementById("koszary1").innerHTML=koszary;
+            document.getElementById("domy1").innerHTML=domy;
+            document.getElementById("centrum1").innerHTML=centrum;
+            document.getElementById("akademia1").innerHTML=akademia;
+            document.getElementById("wieza1").innerHTML=wieza;
+            document.getElementById("magazyn1").innerHTML=magazyn;
+        	document.getElementById("ludnoscmax").innerHTML = ludnoscdom
+			document.getElementById("ludnosc1").innerHTML=ludnosc;
+			
+			drewnokosztd=250*drewnopoziom;
+			kamienkosztd=250*kamienpoziom;
+			wegielkosztd=250*wegielpoziom+250;
+			zlotokosztd=250*zlotopoziom+250;
+			zelazokosztd=250*zelazopoziom+250;
+			koszarykosztd=300*koszary+300;
+			stajniakosztd=300*stajnia+300;
+			domykosztd=280*domy+280;
+			centrumkosztd=250*centrum+250;
+			wiezakosztd=200*wieza+200;
+			magazynkosztd=300*magazyn+300;
+			akademiakosztd=350*akademia+350;
+			
+			drewnokosztk=250*drewnopoziom;
+			kamienkosztk=250*kamienpoziom;
+			wegielkosztk=250*wegielpoziom+250;
+			zlotokosztk=250*zlotopoziom+250;
+			zelazokosztk=250*zelazopoziom+250;
+			koszarykosztk=300*koszary+300;
+			stajniakosztk=300*stajnia+300;
+			domykosztk=300*domy+300;
+			centrumkosztk=300*centrum+300;
+			wiezakosztk=300*wieza+300;
+			magazynkosztk=300*magazyn+300;
+			akademiakosztk=400*akademia+400;
+			robotnikkoszt=200*robotnikilosc+200;
+			
+			document.getElementById("drewno4").innerHTML=drewnokosztd;
+			document.getElementById("drewno5").innerHTML=drewnokosztk;
+			document.getElementById("kamien4").innerHTML=kamienkosztd;
+			document.getElementById("kamien5").innerHTML=kamienkosztk;
+			document.getElementById("wegiel4").innerHTML=wegielkosztd;
+			document.getElementById("wegiel5").innerHTML=wegielkosztk;
+			document.getElementById("zloto4").innerHTML=zlotokosztd;
+			document.getElementById("zloto5").innerHTML=zlotokosztk;
+			document.getElementById("zelazo4").innerHTML=zelazokosztd;
+			document.getElementById("zelazo5").innerHTML=zelazokosztk;
+			document.getElementById("stajnia2").innerHTML=stajniakosztd;
+			document.getElementById("stajnia3").innerHTML=stajniakosztk;
+			document.getElementById("koszary2").innerHTML=koszarykosztd;
+			document.getElementById("koszary3").innerHTML=koszarykosztk;
+			document.getElementById("domy2").innerHTML=domykosztd;
+			document.getElementById("domy3").innerHTML=domykosztk;
+			document.getElementById("wieza2").innerHTML=wiezakosztd;
+			document.getElementById("wieza3").innerHTML=wiezakosztk;
+			document.getElementById("akademia2").innerHTML=akademiakosztd;
+			document.getElementById("akademia3").innerHTML=akademiakosztk;
+			document.getElementById("magazyn2").innerHTML=magazynkosztd;
+			document.getElementById("magazyn3").innerHTML=magazynkosztk;
+			document.getElementById("centrum2").innerHTML=centrumkosztd;
+			document.getElementById("centrum3").innerHTML=centrumkosztk;
+			document.getElementById("pojemnosc").innerHTML=magazynpoj;
+            zapisz();
+        };
+        
+    } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Workers...";
+    }
+	
+}
+
+function stopWorker() { 
+    w.terminate();
+    w = undefined;
+}
+function zapisz() {
+   if (typeof(Storage) !== "undefined") {
+   localStorage.setItem("drewnolvl",drewnopoziom);
+   localStorage.setItem("drewnoi",drewnoilosc);
+   localStorage.setItem("drewnoprac",drewnopracownicy);
+   
+   localStorage.setItem("kamienlvl",kamienpoziom);
+   localStorage.setItem("kamieni",kamienilosc);
+   localStorage.setItem("kamienprac",kamienpracownicy);
+   
+   localStorage.setItem("zlotolvl",zlotopoziom);
+   localStorage.setItem("zlotoi",zlotoilosc);
+   localStorage.setItem("zlotoprac",zlotopracownicy);
+   
+   localStorage.setItem("wegiellvl",wegielpoziom);
+   localStorage.setItem("wegieli",wegielilosc);
+   localStorage.setItem("wegielprac",wegielpracownicy);
+   
+   localStorage.setItem("zelazolvl",zelazopoziom);
+   localStorage.setItem("zelazoi",zelazoilosc);
+   localStorage.setItem("zelazoprac",zelazopracownicy);
+   
+   localStorage.setItem("stajnia",stajnia);
+   localStorage.setItem("koszary",koszary);
+   localStorage.setItem("domy",domy);
+   localStorage.setItem("centrum",centrum);
+   localStorage.setItem("akademia",akademia);
+   localStorage.setItem("wieza",wieza);
+   localStorage.setItem("magazyn",magazyn);
+   localStorage.setItem("maxludzie",ludnoscdom);
+   localStorage.setItem("ludzie",ludnosc);
+   localStorage.setItem("robotnicy",robotnikilosc);
+   localStorage.setItem("pojemnosc",magazynpoj);
+   localStorage.setItem("czas",czas);
+}
+ }
+
+ function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("drag1", ev.target.id);
+
+}
+
+function drop(ev) {
+
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("drag1");
+	 var copy = document.getElementById(data).cloneNode(true);
+  copy.id = "drag2"; 
+  ev.target.appendChild(copy);
+  ev.target.removeChild(copy);
+
+if(zlotoilosc<robotnikkoszt)
+	{
+		alert("Za mało surowców");
+	}
+if(ev.target.id=="div1" & zlotoilosc>=robotnikkoszt & ludnosc<ludnoscdom)
+  {
+	drewnopracownicy=Number(drewnopracownicy)+1;
+	ludnosc=Number(ludnosc)+1;
+	robotnikilosc =Number(robotnikilosc)+1;
+	zlotoilosc=zlotoilosc-robotnikkoszt;
+	
+  }
+  if(ev.target.id=="div2" & zlotoilosc>=robotnikkoszt & ludnosc<ludnoscdom)
+  {
+	kamienpracownicy=Number(kamienpracownicy)+1;
+	ludnosc=Number(ludnosc)+1;
+	robotnikilosc =Number(robotnikilosc)+1;
+	zlotoilosc=zlotoilosc-robotnikkoszt;
+	
+  }
+  if(ev.target.id=="div7" & zlotoilosc>=robotnikkoszt & ludnosc<ludnoscdom)
+  {
+	wegielpracownicy=Number(wegielpracownicy)+1;
+	ludnosc=Number(ludnosc)+1;
+	robotnikilosc =Number(robotnikilosc)+1;
+	zlotoilosc=zlotoilosc-robotnikkoszt;
+	
+  }
+  if(ev.target.id=="div8" & zlotoilosc>=robotnikkoszt & ludnosc<ludnoscdom)
+  {
+	zlotopracownicy=Number(zlotopracownicy)+1;
+	ludnosc=Number(ludnosc)+1;
+	robotnikilosc =Number(robotnikilosc)+1;
+	zlotoilosc=zlotoilosc-robotnikkoszt;
+	
+  }
+  if(ev.target.id=="div9" & zlotoilosc>=robotnikkoszt & ludnosc<ludnoscdom)
+  {
+	zelazopracownicy=Number(zelazopracownicy)+1;
+	ludnosc=Number(ludnosc)+1;
+	robotnikilosc =Number(robotnikilosc)+1;
+	zlotoilosc=zlotoilosc-robotnikkoszt;
+	
+  }
+  
+}
+function adddrewno()
+{
+    
+    if(drewnokosztd<=drewnoilosc & drewnokosztk<=kamienilosc)
+	{
+	    drewnopoziom=Number(drewnopoziom)+1;
+		drewnoilosc=drewnoilosc-drewnokosztd;
+		kamienilosc=kamienilosc-drewnokosztk;
+	}
+	else
+	{
+		alert("Za mało surowców");
+	}
+}
+function addkamien()
+{
+    
+	if(kamienkosztd<=drewnoilosc & kamienkosztk<=kamienilosc)
+	{
+		drewnoilosc=drewnoilosc-kamienkosztd;
+		kamienilosc=kamienilosc-kamienkosztk;
+		kamienpoziom=Number(kamienpoziom)+1;
+	}
+	else
+	{
+		alert("Za mało surowców");
+	}
+}
+function addzloto()
+{
+    
+	if(zlotokosztd<=drewnoilosc & zlotokosztk<=kamienilosc)
+	{
+		drewnoilosc=drewnoilosc-zlotokosztd;
+		kamienilosc=kamienilosc-zlotokosztk;
+		zlotopoziom=Number(zlotopoziom)+1;
+	}
+	else
+	{
+		alert("Za mało surowców");
+	}
+	
+}
+function addwegiel()
+{
+    
+	if(wegielkosztd<=drewnoilosc & wegielkosztk<=kamienilosc)
+	{
+		drewnoilosc=drewnoilosc-wegielkosztd;
+		kamienilosc=kamienilosc-wegielkosztk;
+		wegielpoziom=Number(wegielpoziom)+1;
+	}
+	else
+	{
+		alert("Za mało surowców");
+	}
+}
+function addzelazo()
+{
+    
+	if(zelazokosztd<=drewnoilosc & zelazokosztk<=kamienilosc)
+	{
+		drewnoilosc=drewnoilosc-zelazokosztd;
+		kamienilosc=kamienilosc-zelazokosztk;
+		zelazopoziom=Number(zelazopoziom)+1;
+	}
+	else
+	{
+		alert("Za mało surowców");
+	}
+}
+function addstajnia()
+{
+    
+	if(stajniakosztd<=drewnoilosc & stajniakosztk<=kamienilosc)
+	{
+		drewnoilosc=drewnoilosc-stajniakosztd;
+		kamienilosc=kamienilosc-stajniakosztk;
+		stajnia=Number(stajnia)+1;
+	}
+	else
+	{
+		alert("Za mało surowców");
+	}
+}
+function addkoszary()
+{
+    
+	if(koszarykosztd<=drewnoilosc & koszarykosztk<=kamienilosc)
+	{
+		drewnoilosc=drewnoilosc-koszarykosztd;
+		kamienilosc=kamienilosc-koszarykosztk;
+		koszary=Number(koszary)+1;
+	}
+	else
+	{
+		alert("Za mało surowców");
+	}
+}
+function adddom()
+{
+    
+	if(domykosztd<=drewnoilosc & domykosztk<=kamienilosc)
+	{
+		drewnoilosc=drewnoilosc-domykosztd;
+		kamienilosc=kamienilosc-domykosztk;
+		domy=Number(domy)+1;
+	}
+	else
+	{
+		alert("Za mało surowców");
+	}
+}
+function addcentrum()
+{
+    
+	if(centrumkosztd<=drewnoilosc & centrumkosztk<=kamienilosc)
+	{
+		drewnoilosc=drewnoilosc-centrumkosztd;
+		kamienilosc=kamienilosc-centrumkosztk;
+		centrum=Number(centrum)+1;
+	}
+	else
+	{
+		alert("Za mało surowców");
+	}
+}
+function addakademia()
+{
+    
+	if(akademiakosztd<=drewnoilosc & akademiakosztk<=kamienilosc)
+	{
+		drewnoilosc=drewnoilosc-akademiakosztd;
+		kamienilosc=kamienilosc-akademiakosztk;
+		akademia=Number(akademia)+1;
+	}
+	else
+	{
+		alert("Za mało surowców");
+	}
+}
+function addwieza()
+{
+    
+	if(wiezakosztd<=drewnoilosc & wiezakosztk<=kamienilosc)
+	{
+		drewnoilosc=drewnoilosc-wiezakosztd;
+		kamienilosc=kamienilosc-wiezakosztk;
+		wieza=Number(wieza)+1;
+	}
+	else
+	{
+		alert("Za mało surowców");
+	}
+}
+function addmagazyn()
+{
+    
+	if(magazynkosztd<=drewnoilosc & magazynkosztk<=kamienilosc)
+	{
+		drewnoilosc=drewnoilosc-magazynkosztd;
+		kamienilosc=kamienilosc-magazynkosztk;
+		magazyn=Number(magazyn)+1;
+	}
+	else
+	{
+		alert("Za mało surowców");
+	}
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

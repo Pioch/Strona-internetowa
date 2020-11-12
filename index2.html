@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+ <style> 
+ body {
+  background-color: lightblue;
+ }
+h1
+{
+    text-align: center;
+}
+ 
+ </style>
+ 
+<body>
+
+<div class="container">
+<div class="container">
+ <div class="jumbotron">
+  <h1>Aplikacje internetowe projekt</h1>     
+  </div>
+ <a href="wioska.html" class="btn btn-primary btn-lg btn-block" role="button" onclick="nowaGra()">Nowa gra</a>
+ <a href="wioska.html" class="btn btn-primary btn-lg btn-block" role="button">Kontynuuj</a>
+ <a href="wyniki2.php" class="btn btn-primary btn-lg btn-block" role="button">Najlepsze Wyniki</a>
+ <script>
+function nowaGra()
+{
+    localStorage.setItem("drewnoi",100);
+    localStorage.setItem("drewnolvl",1);
+    localStorage.setItem("drewnoprac",0);
+    
+    localStorage.setItem("kamieni",100);
+    localStorage.setItem("kamienlvl",1);
+    localStorage.setItem("kamienprac",0);
+    
+    localStorage.setItem("zlotoi",0);
+    localStorage.setItem("zlotolvl",0);
+    localStorage.setItem("zlotoprac",0);
+    
+    localStorage.setItem("wegieli",0);
+    localStorage.setItem("wegiellvl",0);
+    localStorage.setItem("wegielprac",0);
+    
+    localStorage.setItem("zelazoi",0);
+    localStorage.setItem("zelazolvl",0);
+    localStorage.setItem("zelazoprac",0);
+    
+    localStorage.setItem("stajnia",0);
+    localStorage.setItem("koszary",0);
+    localStorage.setItem("domy",1);
+    localStorage.setItem("centrum",0);
+    localStorage.setItem("akademia",0);
+    localStorage.setItem("wieza",0);
+    localStorage.setItem("magazyn",1);
+	localStorage.setItem("maxludzie",0);
+	localStorage.setItem("ludzie",0);
+	localStorage.setItem("robotnicy",0);
+	
+	localStorage.setItem("topornicy",0);
+	localStorage.setItem("miecznicy",0);
+	localStorage.setItem("lucznicy",0);
+	localStorage.setItem("kusznicy",0);
+	localStorage.setItem("lekka",0);
+	localStorage.setItem("ciezka",0);
+	localStorage.setItem("magowie",0);
+	localStorage.setItem("arcymagowie",0);
+	
+	localStorage.setItem("topornik1",Math.floor(Math.random() * 3)+18);
+	localStorage.setItem("lucznik1",Math.floor(Math.random() * 3)+10);
+	localStorage.setItem("miecznik1",Math.floor(Math.random() * 3)+3);
+	
+	localStorage.setItem("topornik2",Math.floor(Math.random() * 5)+32);
+	localStorage.setItem("lucznik2",Math.floor(Math.random() * 5)+14);
+	localStorage.setItem("miecznik2",Math.floor(Math.random() * 3)+10);
+	localStorage.setItem("kusznik2",Math.floor(Math.random() * 3)+6);
+	
+	localStorage.setItem("topornik3",Math.floor(Math.random() * 5)+45);
+	localStorage.setItem("lucznik3",Math.floor(Math.random() * 11)+70);
+	localStorage.setItem("miecznik3",Math.floor(Math.random() * 3)+10);
+	
+	localStorage.setItem("miecznik4",Math.floor(Math.random() * 6)+60);
+	localStorage.setItem("lekka4",Math.floor(Math.random() * 6)+20);
+	localStorage.setItem("ciezka4",Math.floor(Math.random() * 4)+22);
+	localStorage.setItem("kusznik4",Math.floor(Math.random() * 6)+30);
+	localStorage.setItem("mag4",Math.floor(Math.random() * 3)+6);
+	
+	localStorage.setItem("miecznik5",Math.floor(Math.random() * 6)+120);
+	localStorage.setItem("mag5",Math.floor(Math.random() * 6)+60);
+	localStorage.setItem("lucznik5",Math.floor(Math.random() * 6)+40);
+	localStorage.setItem("arcymag5",Math.floor(Math.random() * 4)+15);
+	localStorage.setItem("kusznik5",Math.floor(Math.random() * 6)+30);
+	
+	localStorage.setItem("miecznik6",Math.floor(Math.random() * 11)+300);
+	localStorage.setItem("ciezka6",Math.floor(Math.random() * 6)+60);
+	localStorage.setItem("lekka6",Math.floor(Math.random() * 6)+50);
+	localStorage.setItem("mag6",Math.floor(Math.random() * 6)+80);
+	localStorage.setItem("arcymag6",Math.floor(Math.random() * 6)+30);
+	localStorage.setItem("kusznik6",Math.floor(Math.random() * 6)+130);
+	
+	localStorage.setItem("przeciwnik1",0);
+	localStorage.setItem("przeciwnik2",0);
+	localStorage.setItem("przeciwnik3",0);
+	localStorage.setItem("przeciwnik4",0);
+	localStorage.setItem("przeciwnik5",0);
+	localStorage.setItem("przeciwnik6",0);
+	
+	localStorage.setItem("czas",0);
+}
+</script>
+
+</body>
+</html>

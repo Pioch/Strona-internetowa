@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>  
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  
+<style> 
+ body {
+  background-color: lightblue;
+ }
+</style> 
+<body>
+<div class="container">
+
+ <a href="wioska.html" class="btn btn-success" role="button">Wioska</a>
+ <a href="wojsko.html" class="btn btn-success" role="button">Wojsko</a>
+ <a href="mapa.html" class="btn btn-success" role="button">Mapa</a>
+ <a href="index.html" class="btn btn-success" role="button">Powrót do menu</a>
+ 
+ 
+<form action="zapisz.php" method="post" onsubmit="return tworzenie()">
+
+<script>
+function tworzenie()
+{
+var czas=localStorage.getItem("czas");
+
+document.getElementById("time").value=czas;
+
+}
+
+</script> 
+<br>
+<p>Nazwa: <input type="text" name="nazwa">
+<input type="hidden" name="zmienna1" id="time">
+
+<input type="submit" value="Zapisz">
+</form>
+
+
+
+
+</body>
+</html>

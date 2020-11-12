@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+ <style> 
+ body {
+  background-color: lightblue;
+ }
+
+ 
+ </style>
+ 
+<body>
+
+<div class="container">
+
+ <a href="wioska.html" class="btn btn-success" role="button">Wioska</a>
+ <a href="wojsko.html" class="btn btn-success" role="button">Wojsko</a>
+ <a href="mapa.html" class="btn btn-success" role="button">Mapa</a>
+ <a href="statystyki.html" class="btn btn-success" role="button">Statystyki</a>
+ <a href="index.html" class="btn btn-success" role="button">Powrót do menu</a>
+ 
+
+  <body onload="startWorker();Grid()">
+ <canvas id="myCanvas" width="800" height="600"
+style="border:1px solid green;">
+</canvas>
+
+ <script>
+ var w;
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+var drewnopoziom=localStorage.getItem("drewnolvl");
+var drewnopracownicy=localStorage.getItem("drewnoprac");
+var drewnoilosc=localStorage.getItem("drewnoi");
+
+var kamienilosc=localStorage.getItem("kamieni");
+var kamienpoziom=localStorage.getItem("kamienlvl");
+var kamienpracownicy=localStorage.getItem("kamienprac");
+
+var zlotoilosc=localStorage.getItem("zlotoi")
+var zlotopoziom=localStorage.getItem("zlotolvl");
+var zlotopracownicy=localStorage.getItem("zlotoprac");
+
+var wegielilosc=localStorage.getItem("wegieli")
+var wegielpoziom=localStorage.getItem("wegiellvl");
+var wegielpracownicy=localStorage.getItem("wegielprac");
+
+var zelazoilosc=localStorage.getItem("zelazoi")
+var zelazopoziom=localStorage.getItem("zelazolvl");
+var zelazopracownicy=localStorage.getItem("zelazoprac");
+var magazynpoj=localStorage.getItem("pojemnosc");
+
+function Grid()
+	{
+	for (var x = 0; x <= 800; x += 40) 
+		{
+		  ctx.moveTo(x, 0);
+		  ctx.lineTo(x, 600);
+		} 
+
+	for (var y = 0; y <= 600; y += 40) 
+		{
+ 		 ctx.moveTo(0, y);
+ 		 ctx.lineTo(800, y);
+		} 
+
+	ctx.strokeStyle = "gray";
+	ctx.stroke();
+
+	ctx.beginPath();
+
+	ctx.moveTo(40, 0); 
+	ctx.lineTo(40, 600);
+	ctx.moveTo(0, 560); 
+	ctx.lineTo(800, 560);
+
+	ctx.strokeStyle = "black";
+	ctx.stroke();
+	
+	for(var i=1; i<=25;i++)
+	{
+	ctx.fillText(i,40+40*i,560);
+	}
+
+	for(var i=1; i<=20;i++)
+	{
+	ctx.fillText(i,40,560-40*i);
+	}
+
+	ctx.translate(40, 560);
+	
+	}
+
+ function startWorker() {
+    if(typeof(Worker) !== "undefined") {
+        if(typeof(w) == "undefined") {
+            w = new Worker("proces.js");
+        }
+       
+        w.onmessage = function(event) {
+		if(drewnoilosc>=Number(magazynpoj))
+			{
+				drewnoilosc=Number(magazynpoj)-Number(event.data*drewnopoziom+5*drewnopracownicy);
+			}
+			if(kamienilosc>=Number(magazynpoj))
+			{
+				kamienilosc=Number(magazynpoj)-Number(event.data*kamienpoziom+5*kamienpracownicy);
+			}
+			if(wegielilosc>=Number(magazynpoj))
+			{
+				wegielilosc=Number(magazynpoj)-Number(event.data*wegielpoziom+5*wegielpracownicy);
+			}
+			if(zlotoilosc>=Number(magazynpoj))
+			{
+				zlotoilosc=Number(magazynpoj)-Number(event.data*zlotopoziom+5*zlotopracownicy);
+			}
+			if(zelazoilosc>=Number(magazynpoj))
+			{
+				zelazoilosc=Number(magazynpoj)-Number(event.data*zelazopoziom+5*zelazopracownicy);
+			}
+			
+           drewnoilosc= Number(event.data*drewnopoziom+5*drewnopracownicy)+Number(drewnoilosc)
+            kamienilosc = Number(event.data*kamienpoziom+5*kamienpracownicy)+Number(kamienilosc);
+            zlotoilosc = Number(event.data*zlotopoziom+5*zlotopracownicy)+Number(zlotoilosc);
+            wegielilosc = Number(event.data*wegielpoziom+5*wegielpracownicy)+Number(wegielilosc);
+            zelazoilosc = Number(event.data*zelazopoziom+5*zelazopracownicy)+Number(zelazoilosc);
+            zapisz();
+        };
+        
+    } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Workers...";
+    }
+	
+}
+ function zapisz() {
+   if (typeof(Storage) !== "undefined") {
+   
+   localStorage.setItem("drewnoi",drewnoilosc);
+   localStorage.setItem("kamieni",kamienilosc);
+   localStorage.setItem("zlotoi",zlotoilosc);
+   localStorage.setItem("wegieli",wegielilosc);
+   localStorage.setItem("zelazoi",zelazoilosc);
+}
+}
+
+
+
+ </script>
+ 
+</body>
+</html>
